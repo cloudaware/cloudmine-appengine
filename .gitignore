@@ -1,0 +1,13 @@
+target
+*.ipr
+*.iml
+*.iws
+*.ids
+*.pyc
+.idea
+*/.idea
+.DS_Store
+*/.DS_Store
+**/nocommit
+discovery/*
+cloudmine-appengine.json
