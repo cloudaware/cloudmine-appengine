@@ -7,13 +7,15 @@
     <groupId>com.cloudaware.cloudmine</groupId>
     <artifactId>cloudmine-appengine-server</artifactId>
     <name>cloudmine-appengine-server</name>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <properties>
         <appengine.app.id>yourapp</appengine.app.id>
         <appengine.app.version>${endpoints.service.version}</appengine.app.version>
         <endpoints.service.name>cloudmine-appengine.endpoints.${appengine.app.id}.cloud.goog</endpoints.service.name>
         <endpoints.service.version>1970-01-01r0</endpoints.service.version>
+        <queue.xml.webapp.dir>src/main/webapp</queue.xml.webapp.dir>
+        <queue.xml.webapp.file>WEB-INF/queue.xml</queue.xml.webapp.file>
         <appengine-sdk.version>1.9.51</appengine-sdk.version>
         <google-api-client.version>1.22.0</google-api-client.version>
         <endpoints-framework.version>2.0.7</endpoints-framework.version>
@@ -74,6 +76,15 @@
                         <resource>
                             <filtering>true</filtering>
                             <directory>src/main/webapp</directory>
+                            <excludes>
+                                <exclude>WEB-INF/queue.xml</exclude>
+                            </excludes>
+                        </resource>
+                        <resource>
+                            <directory>${queue.xml.webapp.dir}</directory>
+                            <includes>
+                                <include>${queue.xml.webapp.file}</include>
+                            </includes>
                         </resource>
                     </webResources>
                     <warSourceDirectory>src/main/webapp</warSourceDirectory>

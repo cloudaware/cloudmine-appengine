@@ -2,7 +2,10 @@
 
 `mvn clean package -Dappengine.app.id=yourproject -Dendpoints.service.version=2017-04-28r0`
 
-Optionally you can override API name completely with `-Dendpoints.service.name=yourapi.endpoints.yourproject.cloud.goog`
+Optionally 
+
+* override API name completely with `-Dendpoints.service.name=yourapi.endpoints.yourproject.cloud.goog`
+* use `WEB-INF/queue.xml` from other webapp directory, e.g. `-Dqueue.xml.webapp.dir=/otherproject/src/main/webapp`
 
 # Dev Server
 
@@ -56,6 +59,8 @@ For local development use:
 ```
 Create valid API Key in your Google Console - API Management - Credentials
 
+When starting dev sever you should set `queue.xml.webapp.dir` property if you're using non-default queues. 
+
 # Client Library
 
 Client library built using [apis-client-generator](https://github.com/google/apis-client-generator)
@@ -82,4 +87,5 @@ To build client library:
 
 # Changelog
 
+* 1.0.1 - Added property `queue.xml.webapp.dir`
 * 1.0.0 - Initial release
