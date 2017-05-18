@@ -31,6 +31,12 @@ import com.google.api.server.spi.response.InternalServerErrorException;
 import com.google.appengine.api.taskqueue.QueueFactory;
 import com.google.appengine.api.taskqueue.TaskAlreadyExistsException;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 @Api(
         name = "cloudtasks",
         canonicalName = "CloudTasks",
@@ -47,6 +53,12 @@ import com.google.appengine.api.taskqueue.TaskAlreadyExistsException;
         apiKeyRequired = AnnotationBoolean.TRUE
 )
 public final class CloudTasksApi {
+    private static final DateFormat ISO_DATE_FORMAT;
+
+    static {
+        ISO_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
+        ISO_DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
+    }
 
     @ApiMethod(
             httpMethod = ApiMethod.HttpMethod.POST,
@@ -67,8 +79,15 @@ public final class CloudTasksApi {
         final Task task = createTaskRequest.getTask();
 
         if (task.getScheduleTime() != null) {
-            //TODO: extract from iso date, and set difference to countdown
-//            in.countdownMillis(taskOptions.getCountdownMillis());
+            try {
+                final Date date = ISO_DATE_FORMAT.parse(task.getScheduleTime());
+                final long millis = date.getTime() - new Date().getTime();
+                if (millis > 0) {
+                    in.countdownMillis(millis);
+                }
+            } catch (ParseException e) {
+                throw new InternalServerErrorException("Cannot deserialize Schedule Time");
+            }
         }
 //        if (taskOptions.getEtaMillis() != null) {
 //            in.etaMillis(taskOptions.getEtaMillis());

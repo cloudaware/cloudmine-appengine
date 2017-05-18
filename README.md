@@ -5,6 +5,7 @@
 Optionally 
 
 * override API name completely with `-Dendpoints.service.name=yourapi.endpoints.yourproject.cloud.goog`
+* disable service management for local development with `-Ddisable-service-management=true`
 * use `WEB-INF/queue.xml` from other webapp directory, e.g. `-Dqueue.xml.webapp.dir=/otherproject/src/main/webapp`
 
 # Dev Server
@@ -13,7 +14,7 @@ You should export following environment variables:
  
 * `ENDPOINTS_SERVICE_NAME` - should be the same as `endpoints.service.name`
 * `ENDPOINTS_SERVICE_VERSION` - should be the same as `endpoints.service.version`
-* `ENDPOINTS_PROJECT_ID` - should be the same as `appengine.app.id`. Needed for service control
+* `ENDPOINTS_PROJECT_ID` - should be the same as `appengine.app.id`. Needed for service management
 
 Optionally you might want to supply service account credentials (JSON file):
 
@@ -87,5 +88,6 @@ To build client library:
 
 # Changelog
 
+* 1.0.2 - Added property `-Ddisable-service-management=true` to disable service management for local development
 * 1.0.1 - Added property `queue.xml.webapp.dir`
 * 1.0.0 - Initial release
