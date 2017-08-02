@@ -88,6 +88,7 @@ To build client library:
 
 # Changelog
 
+* 1.0.3 - Updated to latest CloudTasks version
 * 1.0.2 - Added property `-Ddisable-service-management=true` to disable service management for local development
 * 1.0.1 - Added property `queue.xml.webapp.dir`
 * 1.0.0 - Initial release

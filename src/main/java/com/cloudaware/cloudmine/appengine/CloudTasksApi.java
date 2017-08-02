@@ -111,9 +111,9 @@ public final class CloudTasksApi {
 //            in.payload(taskOptions.getPayloadBytes());
 //        }
 
-        if (appEngineTaskTarget.getRetryConfig() != null) {
+        if (task.getRetryConfig() != null || appEngineTaskTarget.getRetryConfig() != null) {
             final com.google.appengine.api.taskqueue.RetryOptions rt = com.google.appengine.api.taskqueue.RetryOptions.Builder.withDefaults();
-            final RetryConfig retryConfig = appEngineTaskTarget.getRetryConfig();
+            final RetryConfig retryConfig = task.getRetryConfig() != null ? task.getRetryConfig() : appEngineTaskTarget.getRetryConfig();
             if (retryConfig.getMaxBackoff() != null) {
                 rt.maxBackoffSeconds(Double.parseDouble(
                         retryConfig.getMaxBackoff().substring(0, retryConfig.getMaxBackoff().length() - 1)

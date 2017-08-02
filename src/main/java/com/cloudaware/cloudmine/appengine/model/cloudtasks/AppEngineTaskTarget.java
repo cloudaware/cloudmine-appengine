@@ -1,5 +1,7 @@
 package com.cloudaware.cloudmine.appengine.model.cloudtasks;
 
+import java.util.Map;
+
 /**
  * App Engine task target.
  * <p>
@@ -85,7 +87,7 @@ public final class AppEngineTaskTarget {
      * no matter what the setting is for the task-level app_engine_routing.
      * The value may be {@code null}.
      */
-    @com.google.api.client.util.Key
+
     private AppEngineRouting appEngineRouting;
 
     /**
@@ -112,7 +114,7 @@ public final class AppEngineTaskTarget {
      * handlers#reading_request_headers).
      * The value may be {@code null}.
      */
-    @com.google.api.client.util.Key
+
     private java.util.Map<String, String> headers;
 
     /**
@@ -128,7 +130,7 @@ public final class AppEngineTaskTarget {
      * gine/docs/python/tools/webapp/requesthandlerclass).
      * The value may be {@code null}.
      */
-    @com.google.api.client.util.Key
+
     private String httpMethod;
 
     /**
@@ -139,7 +141,7 @@ public final class AppEngineTaskTarget {
      * with an incompatible HttpMethod.
      * The value may be {@code null}.
      */
-    @com.google.api.client.util.Key
+
     private String payload;
 
     /**
@@ -151,16 +153,19 @@ public final class AppEngineTaskTarget {
      * characters.
      * The value may be {@code null}.
      */
-    @com.google.api.client.util.Key
+
     private String relativeUrl;
 
     /**
+     * Deprecated. Task.retry_config replaces this field. If both this field and Task.retry_config are
+     * specified, Task.retry_config takes precedence.
+     * <p>
      * Settings that determine the retry behavior.
      * <p>
      * The task's retry configuration overrides the queue's retry configuration.
      * The value may be {@code null}.
      */
-    @com.google.api.client.util.Key
+
     private RetryConfig retryConfig;
 
     /**
@@ -242,7 +247,7 @@ public final class AppEngineTaskTarget {
      *
      * @param headers headers or {@code null} for none
      */
-    public AppEngineTaskTarget setHeaders(final java.util.Map<String, String> headers) {
+    public AppEngineTaskTarget setHeaders(final Map<String, String> headers) {
         this.headers = headers;
         return this;
     }
@@ -308,8 +313,8 @@ public final class AppEngineTaskTarget {
      * @param payload payload or {@code null} for none
      * @see #encodePayload()
      */
-    public AppEngineTaskTarget setPayload(final String payloadArg) {
-        this.payload = payloadArg;
+    public AppEngineTaskTarget setPayload(final String payload) {
+        this.payload = payload;
         return this;
     }
 
@@ -377,6 +382,9 @@ public final class AppEngineTaskTarget {
     }
 
     /**
+     * Deprecated. Task.retry_config replaces this field. If both this field and Task.retry_config are
+     * specified, Task.retry_config takes precedence.
+     * <p>
      * Settings that determine the retry behavior.
      * <p>
      * The task's retry configuration overrides the queue's retry configuration.
@@ -388,6 +396,9 @@ public final class AppEngineTaskTarget {
     }
 
     /**
+     * Deprecated. Task.retry_config replaces this field. If both this field and Task.retry_config are
+     * specified, Task.retry_config takes precedence.
+     * <p>
      * Settings that determine the retry behavior.
      * <p>
      * The task's retry configuration overrides the queue's retry configuration.
