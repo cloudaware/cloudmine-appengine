@@ -81,13 +81,14 @@ To build client library:
 
 # New API Version Deployment
 
-1. Build project - you will create/update `cloudmine-amazon.json` in root folder 
+1. Build project - you will create/update `cloudmine-appengine.json` in root folder 
 2. `gcloud service-management deploy cloudmine-appengine.json`
 3. Receive new API Version and update your `ENDPOINTS_SERVICE_VERSION` environment variable and `endpoints.service.version` property
 4. `mvn clean package appengine:update -Dappengine.app.id=yourproject -Dendpoints.service.version=2017-05-02r0` (`2017-05-02r0` - is your new version)
 
 # Changelog
 
+* 1.0.4 - deprecated refactoring
 * 1.0.3 - Updated to latest CloudTasks version
 * 1.0.2 - Added property `-Ddisable-service-management=true` to disable service management for local development
 * 1.0.1 - Added property `queue.xml.webapp.dir`

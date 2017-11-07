@@ -16,9 +16,8 @@
 
 package com.cloudaware.cloudmine.appengine;
 
-import com.cloudaware.cloudmine.appengine.model.cloudtasks.AppEngineTaskTarget;
+import com.cloudaware.cloudmine.appengine.model.cloudtasks.AppEngineHttpRequest;
 import com.cloudaware.cloudmine.appengine.model.cloudtasks.CreateTaskRequest;
-import com.cloudaware.cloudmine.appengine.model.cloudtasks.RetryConfig;
 import com.cloudaware.cloudmine.appengine.model.cloudtasks.Task;
 import com.google.api.server.spi.Constant;
 import com.google.api.server.spi.config.AnnotationBoolean;
@@ -26,6 +25,7 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.config.Named;
+import com.google.api.server.spi.response.BadRequestException;
 import com.google.api.server.spi.response.ConflictException;
 import com.google.api.server.spi.response.InternalServerErrorException;
 import com.google.appengine.api.taskqueue.QueueFactory;
@@ -70,13 +70,26 @@ public final class CloudTasksApi {
             @Named("locationId") final String locationId,
             @Named("queueName") final String queueName,
             final CreateTaskRequest createTaskRequest
-    ) throws InternalServerErrorException, ConflictException {
+    ) throws InternalServerErrorException, ConflictException, BadRequestException {
         if (projectId == null || locationId == null || queueName == null) {
             throw new InternalServerErrorException("Cannot find parent");
         }
 
         final com.google.appengine.api.taskqueue.TaskOptions in = com.google.appengine.api.taskqueue.TaskOptions.Builder.withDefaults();
         final Task task = createTaskRequest.getTask();
+
+        if (task.getAppEngineTaskTarget() != null) {
+            throw new BadRequestException("AppEngineTaskTarget is deprecated");
+        }
+
+        if (task.getName() != null) {
+            String taskName = task.getName();
+            final int index = taskName.indexOf("/tasks/");
+            if (index != -1) {
+                taskName = taskName.substring(index + 7);
+            }
+            in.taskName(taskName);
+        }
 
         if (task.getScheduleTime() != null) {
             try {
@@ -89,67 +102,23 @@ public final class CloudTasksApi {
                 throw new InternalServerErrorException("Cannot deserialize Schedule Time");
             }
         }
-//        if (taskOptions.getEtaMillis() != null) {
-//            in.etaMillis(taskOptions.getEtaMillis());
-//        }
 
-        final AppEngineTaskTarget appEngineTaskTarget = task.getAppEngineTaskTarget();
+        final AppEngineHttpRequest appEngineHttpRequest = task.getAppEngineHttpRequest();
 
-        if (appEngineTaskTarget.getHeaders() != null) {
-            for (final String header : appEngineTaskTarget.getHeaders().keySet()) {
-                in.header(header, appEngineTaskTarget.getHeaders().get(header));
+        if (appEngineHttpRequest.getHeaders() != null) {
+            for (final String header : appEngineHttpRequest.getHeaders().keySet()) {
+                in.header(header, appEngineHttpRequest.getHeaders().get(header));
             }
         }
-        if (appEngineTaskTarget.getHttpMethod() != null) {
-            in.method(com.google.appengine.api.taskqueue.TaskOptions.Method.valueOf(appEngineTaskTarget.getHttpMethod()));
+        if (appEngineHttpRequest.getHttpMethod() != null) {
+            in.method(com.google.appengine.api.taskqueue.TaskOptions.Method.valueOf(appEngineHttpRequest.getHttpMethod()));
         }
 
-        if (appEngineTaskTarget.getPayload() != null) {
-            in.payload(com.google.api.client.util.Base64.decodeBase64(appEngineTaskTarget.getPayload()));
+        if (appEngineHttpRequest.getPayload() != null) {
+            in.payload(com.google.api.client.util.Base64.decodeBase64(appEngineHttpRequest.getPayload()));
         }
-//        if (taskOptions.getPayloadBytes() != null) {
-//            in.payload(taskOptions.getPayloadBytes());
-//        }
-
-        if (task.getRetryConfig() != null || appEngineTaskTarget.getRetryConfig() != null) {
-            final com.google.appengine.api.taskqueue.RetryOptions rt = com.google.appengine.api.taskqueue.RetryOptions.Builder.withDefaults();
-            final RetryConfig retryConfig = task.getRetryConfig() != null ? task.getRetryConfig() : appEngineTaskTarget.getRetryConfig();
-            if (retryConfig.getMaxBackoff() != null) {
-                rt.maxBackoffSeconds(Double.parseDouble(
-                        retryConfig.getMaxBackoff().substring(0, retryConfig.getMaxBackoff().length() - 1)
-                ));
-            }
-            if (retryConfig.getMaxDoublings() != null) {
-                rt.maxDoublings(retryConfig.getMaxDoublings());
-            }
-            if (retryConfig.getMinBackoff() != null) {
-                rt.minBackoffSeconds(Double.parseDouble(
-                        retryConfig.getMinBackoff().substring(0, retryConfig.getMinBackoff().length() - 1)
-                ));
-            }
-            if (retryConfig.getTaskAgeLimit() != null) {
-                rt.taskAgeLimitSeconds(Long.parseLong(
-                        retryConfig.getTaskAgeLimit().substring(0, retryConfig.getTaskAgeLimit().length() - 1)
-                ));
-            }
-            if ((retryConfig.getUnlimitedAttempts() == null || !retryConfig.getUnlimitedAttempts()) && retryConfig.getMaxAttempts() != null) {
-                rt.taskRetryLimit(retryConfig.getMaxAttempts());
-            }
-            in.retryOptions(rt);
-        }
-//        if (taskOptions.getTag() != null) {
-//            in.tag(taskOptions.getTag());
-//        }
-        if (task.getName() != null) {
-            String taskName = task.getName();
-            final int index = taskName.indexOf("/tasks/");
-            if (index != -1) {
-                taskName = taskName.substring(index + 7);
-            }
-            in.taskName(taskName);
-        }
-        if (appEngineTaskTarget.getRelativeUrl() != null) {
-            final String[] parts = appEngineTaskTarget.getRelativeUrl().split("\\?");
+        if (appEngineHttpRequest.getRelativeUrl() != null) {
+            final String[] parts = appEngineHttpRequest.getRelativeUrl().split("\\?");
             in.url(parts[0]);
             if (parts.length > 1) {
                 final String[] queryParams = parts[1].split("&");
@@ -160,8 +129,8 @@ public final class CloudTasksApi {
                     }
                 }
             }
-
         }
+
         final com.google.appengine.api.taskqueue.TaskHandle taskHandle;
         try {
             taskHandle = QueueFactory.getQueue(queueName).add(in);
@@ -169,7 +138,7 @@ public final class CloudTasksApi {
             throw new ConflictException("Requested entity already exists", "alreadyExist", "global");
         }
         final Task out = new Task();
-        out.setAppEngineTaskTarget(task.getAppEngineTaskTarget());
+        out.setAppEngineHttpRequest(task.getAppEngineHttpRequest());
         out.setName(taskHandle.getName());
         return out;
     }
