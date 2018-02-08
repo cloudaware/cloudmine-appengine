@@ -7,7 +7,7 @@
     <groupId>com.cloudaware.cloudmine</groupId>
     <artifactId>cloudmine-appengine-server</artifactId>
     <name>cloudmine-appengine-server</name>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
 
     <properties>
         <appengine.app.id>yourapp</appengine.app.id>

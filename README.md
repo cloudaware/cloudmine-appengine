@@ -88,6 +88,7 @@ To build client library:
 
 # Changelog
 
+* 1.0.6 - eta fix
 * 1.0.5 - scheduleTime format fix (allow milliseconds)
 * 1.0.4 - deprecated refactoring
 * 1.0.3 - Updated to latest CloudTasks version

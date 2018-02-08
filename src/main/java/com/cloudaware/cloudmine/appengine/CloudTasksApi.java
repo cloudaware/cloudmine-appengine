@@ -96,7 +96,7 @@ public final class CloudTasksApi {
                 final Date date = ISO_DATE_FORMAT.parse(task.getScheduleTime());
                 final long millis = date.getTime() - new Date().getTime();
                 if (millis > 0) {
-                    in.countdownMillis(millis);
+                    in.etaMillis(millis);
                 }
             } catch (ParseException e) {
                 throw new InternalServerErrorException("Cannot deserialize Schedule Time");
