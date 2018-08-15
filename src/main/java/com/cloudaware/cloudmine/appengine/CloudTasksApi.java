@@ -31,11 +31,9 @@ import com.google.api.server.spi.response.InternalServerErrorException;
 import com.google.appengine.api.taskqueue.QueueFactory;
 import com.google.appengine.api.taskqueue.TaskAlreadyExistsException;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
 
 @Api(
         name = "cloudtasks",
@@ -53,12 +51,6 @@ import java.util.TimeZone;
         apiKeyRequired = AnnotationBoolean.TRUE
 )
 public final class CloudTasksApi {
-    private static final DateFormat ISO_DATE_FORMAT;
-
-    static {
-        ISO_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-        ISO_DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
-    }
 
     @ApiMethod(
             httpMethod = ApiMethod.HttpMethod.POST,
@@ -93,7 +85,7 @@ public final class CloudTasksApi {
 
         if (task.getScheduleTime() != null) {
             try {
-                final Date date = ISO_DATE_FORMAT.parse(task.getScheduleTime());
+                final Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX").parse(task.getScheduleTime());
                 in.etaMillis(date.getTime());
             } catch (ParseException e) {
                 throw new InternalServerErrorException("Cannot deserialize Schedule Time");

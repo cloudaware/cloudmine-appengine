@@ -7,7 +7,7 @@
     <groupId>com.cloudaware.cloudmine</groupId>
     <artifactId>cloudmine-appengine-server</artifactId>
     <name>cloudmine-appengine-server</name>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
 
     <properties>
         <appengine.app.id>yourapp</appengine.app.id>
@@ -17,7 +17,7 @@
         <queue.xml.webapp.dir>src/main/webapp</queue.xml.webapp.dir>
         <queue.xml.webapp.file>WEB-INF/queue.xml</queue.xml.webapp.file>
         <appengine-sdk.version>1.9.51</appengine-sdk.version>
-        <google-api-client.version>1.22.0</google-api-client.version>
+        <google-api-client.version>1.23.0</google-api-client.version>
         <endpoints-framework.version>2.0.7</endpoints-framework.version>
         <endpoints-management.version>1.0.2</endpoints-management.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
