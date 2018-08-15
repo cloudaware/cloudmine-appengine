@@ -1,3 +1,5 @@
+[![Build Status](https://jenkins.cloudaware.com/buildStatus/icon?style=plastic&job=cloudmine-appengine%20deploy)](https://jenkins.cloudaware.com/job/cloudmine-appengine%20deploy)
+
 # Build
 
 `mvn clean package -Dappengine.app.id=yourproject -Dendpoints.service.version=2017-04-28r0`
@@ -82,12 +84,13 @@ To build client library:
 # New API Version Deployment
 
 1. Build project - you will create/update `cloudmine-appengine.json` in root folder 
-2. `gcloud service-management deploy cloudmine-appengine.json`
+2. `gcloud endpoints services deploy cloudmine-appengine.json`
 3. Receive new API Version and update your `ENDPOINTS_SERVICE_VERSION` environment variable and `endpoints.service.version` property
-4. `mvn clean package appengine:update -Dappengine.app.id=yourproject -Dendpoints.service.version=2017-05-02r0` (`2017-05-02r0` - is your new version)
+4. `mvn clean package appengine:deploy -Dappengine.app.id=yourproject -Dendpoints.service.version=2017-05-02r0` (`2017-05-02r0` - is your new version)
 
 # Changelog
 
+* 1.0.8 - change appengine-maven-plugin, readme actualized
 * 1.0.7 - change google-api-client version
 * 1.0.6 - eta fix
 * 1.0.5 - scheduleTime format fix (allow milliseconds)
