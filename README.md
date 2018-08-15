@@ -88,6 +88,7 @@ To build client library:
 
 # Changelog
 
+* 1.0.7 - change google-api-client version
 * 1.0.6 - eta fix
 * 1.0.5 - scheduleTime format fix (allow milliseconds)
 * 1.0.4 - deprecated refactoring
