@@ -7,7 +7,7 @@
     <groupId>com.cloudaware.cloudmine</groupId>
     <artifactId>cloudmine-appengine-server</artifactId>
     <name>cloudmine-appengine-server</name>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
 
     <properties>
         <appengine.app.id>yourapp</appengine.app.id>
@@ -93,19 +93,20 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>com.google.appengine</groupId>
+                <groupId>com.google.cloud.tools</groupId>
                 <artifactId>appengine-maven-plugin</artifactId>
-                <version>${appengine-sdk.version}</version>
+                <version>1.2.1</version>
                 <configuration>
-                    <appId>${appengine.app.id}</appId>
+                    <project>${appengine.app.id}</project>
                     <version>${appengine.app.version}</version>
-                    <port>9094</port>
+                    <promote>false</promote>
+                    <stage.appEngineDirectory>${project.build.directory}/appengine</stage.appEngineDirectory>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>com.cloudaware</groupId>
                 <artifactId>endpoints-maven-plugin</artifactId>
-                <version>1.0.1</version>
+                <version>1.0.2</version>
                 <configuration>
                     <apis>
                         <param>com.cloudaware.cloudmine.appengine.AppEngineApi</param>
