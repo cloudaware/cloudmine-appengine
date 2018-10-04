@@ -18,13 +18,10 @@
  * Modify at your own risk.
  */
 
-package com.cloudaware.cloudmine.appengine.model.cloudtasks;
+package com.cloudaware.cloudmine.appengine.model.cloudtasks.v2beta2;
 
 /**
- * The pull message contains data that can be used by the caller of CloudTasks.PullTasks to process
- * the task.
- * <p>
- * This proto can only be used for tasks in a queue which has Queue.pull_target set.
+ * Deprecated. Use PullMessage.
  * <p>
  * <p> This is the Java data model class that specifies how to parse/serialize into the JSON that is
  * transmitted over HTTP when working with the Cloud Tasks API. For a detailed explanation see:
@@ -34,28 +31,24 @@ package com.cloudaware.cloudmine.appengine.model.cloudtasks;
  * @author Google, Inc.
  */
 @SuppressWarnings("javadoc")
-public final class PullMessage {
+public final class PullTaskTarget {
 
     /**
-     * A data payload consumed by the task worker to execute the task.
+     * Deprecated. Use PullMessage.payload.
      * The value may be {@code null}.
      */
     @com.google.api.client.util.Key
     private String payload;
 
     /**
-     * A meta-data tag for this task.
-     * <p>
-     * This value is used by CloudTasks.PullTasks calls when PullTasksRequest.filter is `tag=`.
-     * <p>
-     * The tag must be less than 500 bytes.
+     * Deprecated. Use PullMessage.tag.
      * The value may be {@code null}.
      */
     @com.google.api.client.util.Key
     private String tag;
 
     /**
-     * A data payload consumed by the task worker to execute the task.
+     * Deprecated. Use PullMessage.payload.
      *
      * @return value or {@code null} for none
      * @see #decodePayload()
@@ -65,18 +58,18 @@ public final class PullMessage {
     }
 
     /**
-     * A data payload consumed by the task worker to execute the task.
+     * Deprecated. Use PullMessage.payload.
      *
      * @param payload payload or {@code null} for none
      * @see #encodePayload()
      */
-    public PullMessage setPayload(String payload) {
+    public PullTaskTarget setPayload(String payload) {
         this.payload = payload;
         return this;
     }
 
     /**
-     * A data payload consumed by the task worker to execute the task.
+     * Deprecated. Use PullMessage.payload.
      *
      * @return Base64 decoded value or {@code null} for none
      * @see #getPayload()
@@ -87,7 +80,7 @@ public final class PullMessage {
     }
 
     /**
-     * A data payload consumed by the task worker to execute the task.
+     * Deprecated. Use PullMessage.payload.
      *
      * @see #setPayload()
      * <p>
@@ -96,17 +89,13 @@ public final class PullMessage {
      * </p>
      * @since 1.14
      */
-    public PullMessage encodePayload(byte[] payload) {
+    public PullTaskTarget encodePayload(byte[] payload) {
         this.payload = com.google.api.client.util.Base64.encodeBase64URLSafeString(payload);
         return this;
     }
 
     /**
-     * A meta-data tag for this task.
-     * <p>
-     * This value is used by CloudTasks.PullTasks calls when PullTasksRequest.filter is `tag=`.
-     * <p>
-     * The tag must be less than 500 bytes.
+     * Deprecated. Use PullMessage.tag.
      *
      * @return value or {@code null} for none
      * @see #decodeTag()
@@ -116,26 +105,18 @@ public final class PullMessage {
     }
 
     /**
-     * A meta-data tag for this task.
-     * <p>
-     * This value is used by CloudTasks.PullTasks calls when PullTasksRequest.filter is `tag=`.
-     * <p>
-     * The tag must be less than 500 bytes.
+     * Deprecated. Use PullMessage.tag.
      *
      * @param tag tag or {@code null} for none
      * @see #encodeTag()
      */
-    public PullMessage setTag(String tag) {
+    public PullTaskTarget setTag(String tag) {
         this.tag = tag;
         return this;
     }
 
     /**
-     * A meta-data tag for this task.
-     * <p>
-     * This value is used by CloudTasks.PullTasks calls when PullTasksRequest.filter is `tag=`.
-     * <p>
-     * The tag must be less than 500 bytes.
+     * Deprecated. Use PullMessage.tag.
      *
      * @return Base64 decoded value or {@code null} for none
      * @see #getTag()
@@ -146,11 +127,7 @@ public final class PullMessage {
     }
 
     /**
-     * A meta-data tag for this task.
-     * <p>
-     * This value is used by CloudTasks.PullTasks calls when PullTasksRequest.filter is `tag=`.
-     * <p>
-     * The tag must be less than 500 bytes.
+     * Deprecated. Use PullMessage.tag.
      *
      * @see #setTag()
      * <p>
@@ -159,7 +136,7 @@ public final class PullMessage {
      * </p>
      * @since 1.14
      */
-    public PullMessage encodeTag(byte[] tag) {
+    public PullTaskTarget encodeTag(byte[] tag) {
         this.tag = com.google.api.client.util.Base64.encodeBase64URLSafeString(tag);
         return this;
     }

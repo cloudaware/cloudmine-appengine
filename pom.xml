@@ -7,7 +7,7 @@
     <groupId>com.cloudaware.cloudmine</groupId>
     <artifactId>cloudmine-appengine-server</artifactId>
     <name>cloudmine-appengine-server</name>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
 
     <properties>
         <appengine.app.id>yourapp</appengine.app.id>
@@ -21,7 +21,7 @@
         <endpoints-framework.version>2.0.7</endpoints-framework.version>
         <endpoints-management.version>1.0.2</endpoints-management.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <google-api-services-cloudtasks.version>v2beta2-rev11-${google-api-client.version}</google-api-services-cloudtasks.version>
+        <esp-enabled>true</esp-enabled>
     </properties>
 
     <dependencies>
@@ -52,6 +52,39 @@
             <version>${endpoints-management.version}</version>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>esp-enabled</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>esp-enabled</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <properties>
+                <esp.config><![CDATA[
+    <env-variables>
+        <env-var name="ENDPOINTS_SERVICE_NAME" value="${endpoints.service.name}"/>
+        <env-var name="ENDPOINTS_SERVICE_VERSION" value="${endpoints.service.version}"/>
+    </env-variables>
+]]></esp.config>
+            </properties>
+        </profile>
+        <profile>
+            <id>esp-disabled</id>
+            <activation>
+                <property>
+                    <name>esp-enabled</name>
+                    <value>false</value>
+                </property>
+            </activation>
+            <properties>
+                <esp.config></esp.config>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
         <finalName>${project.artifactId}</finalName>
@@ -110,7 +143,8 @@
                 <configuration>
                     <apis>
                         <param>com.cloudaware.cloudmine.appengine.AppEngineApi</param>
-                        <param>com.cloudaware.cloudmine.appengine.CloudTasksApi</param>
+                        <!--<param>com.cloudaware.cloudmine.appengine.CloudTasksV2beta2Api</param>-->
+                        <param>com.cloudaware.cloudmine.appengine.CloudTasksV2beta3Api</param>
                     </apis>
                 </configuration>
                 <executions>

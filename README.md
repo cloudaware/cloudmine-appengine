@@ -90,6 +90,7 @@ To build client library:
 
 # Changelog
 
+* 1.0.9 - added support for cloudtask v2beta3
 * 1.0.8 - change appengine-maven-plugin, readme actualized
 * 1.0.7 - change google-api-client version
 * 1.0.6 - eta fix
