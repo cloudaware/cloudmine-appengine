@@ -22,8 +22,5 @@
         <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
     </system-properties>
 
-    <env-variables>
-        <env-var name="ENDPOINTS_SERVICE_NAME" value="${endpoints.service.name}"/>
-        <env-var name="ENDPOINTS_SERVICE_VERSION" value="${endpoints.service.version}"/>
-    </env-variables>
+    ${esp.config}
 </appengine-web-app>

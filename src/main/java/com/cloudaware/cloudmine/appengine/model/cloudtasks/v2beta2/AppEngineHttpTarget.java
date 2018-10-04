@@ -18,7 +18,7 @@
  * Modify at your own risk.
  */
 
-package com.cloudaware.cloudmine.appengine.model.cloudtasks;
+package com.cloudaware.cloudmine.appengine.model.cloudtasks.v2beta2;
 
 /**
  * App Engine HTTP target.

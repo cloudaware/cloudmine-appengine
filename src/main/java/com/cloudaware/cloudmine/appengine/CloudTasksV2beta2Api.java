@@ -16,9 +16,9 @@
 
 package com.cloudaware.cloudmine.appengine;
 
-import com.cloudaware.cloudmine.appengine.model.cloudtasks.AppEngineHttpRequest;
-import com.cloudaware.cloudmine.appengine.model.cloudtasks.CreateTaskRequest;
-import com.cloudaware.cloudmine.appengine.model.cloudtasks.Task;
+import com.cloudaware.cloudmine.appengine.model.cloudtasks.v2beta2.AppEngineHttpRequest;
+import com.cloudaware.cloudmine.appengine.model.cloudtasks.v2beta2.CreateTaskRequest;
+import com.cloudaware.cloudmine.appengine.model.cloudtasks.v2beta2.Task;
 import com.google.api.server.spi.Constant;
 import com.google.api.server.spi.config.AnnotationBoolean;
 import com.google.api.server.spi.config.Api;
@@ -50,7 +50,7 @@ import java.util.Date;
         clientIds = {Constant.API_EXPLORER_CLIENT_ID},
         apiKeyRequired = AnnotationBoolean.TRUE
 )
-public final class CloudTasksApi {
+public final class CloudTasksV2beta2Api {
 
     @ApiMethod(
             httpMethod = ApiMethod.HttpMethod.POST,
