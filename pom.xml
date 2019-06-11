@@ -7,7 +7,7 @@
     <groupId>com.cloudaware.cloudmine</groupId>
     <artifactId>cloudmine-appengine-server</artifactId>
     <name>cloudmine-appengine-server</name>
-    <version>1.0.9</version>
+    <version>1.0.10</version>
 
     <properties>
         <appengine.app.id>yourapp</appengine.app.id>
@@ -145,6 +145,7 @@
                         <param>com.cloudaware.cloudmine.appengine.AppEngineApi</param>
                         <!--<param>com.cloudaware.cloudmine.appengine.CloudTasksV2beta2Api</param>-->
                         <param>com.cloudaware.cloudmine.appengine.CloudTasksV2beta3Api</param>
+                        <param>com.cloudaware.cloudmine.appengine.CloudTasksV2Api</param>
                     </apis>
                 </configuration>
                 <executions>
