@@ -139,8 +139,10 @@
             <plugin>
                 <groupId>com.cloudaware</groupId>
                 <artifactId>endpoints-maven-plugin</artifactId>
-                <version>1.0.2</version>
+                <version>1.0.5</version>
                 <configuration>
+                    <urlPattern>/_ah/api/*</urlPattern>
+                    <basePath>/_ah/api</basePath>
                     <apis>
                         <param>com.cloudaware.cloudmine.appengine.AppEngineApi</param>
                         <!--<param>com.cloudaware.cloudmine.appengine.CloudTasksV2beta2Api</param>-->
