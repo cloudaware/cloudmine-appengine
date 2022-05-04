@@ -46,8 +46,8 @@ import java.util.Date;
                 packagePath = "cloudmine"
         ),
         version = "v2",
-        scopes = {Constant.API_EMAIL_SCOPE},
-        clientIds = {Constant.API_EXPLORER_CLIENT_ID},
+        scopes = Constant.API_EMAIL_SCOPE,
+        clientIds = Constant.API_EXPLORER_CLIENT_ID,
         apiKeyRequired = AnnotationBoolean.TRUE
 )
 public final class CloudTasksV2Api {

@@ -104,7 +104,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.6</version>
+                <version>3.3.2</version>
                 <configuration>
                     <webResources>
                         <resource>
@@ -177,18 +177,20 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.17</version>
+                <version>3.1.2</version>
                 <inherited>true</inherited>
                 <configuration>
                     <configLocation>https://raw.githubusercontent.com/cloudaware/checkstyle-config/master/checkstyle.xml</configLocation>
+                    <suppressionsLocation>${project.basedir}/suppressions.xml</suppressionsLocation>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
                 </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>7.7</version>
+                        <version>9.3</version>
                     </dependency>
                 </dependencies>
                 <executions>
@@ -203,4 +205,10 @@
             </plugin>
         </plugins>
     </build>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>production</id>
+            <url>https://nexus.cloudaware.com/content/groups/production/</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
