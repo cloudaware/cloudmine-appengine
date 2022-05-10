@@ -111,7 +111,7 @@
                             <filtering>true</filtering>
                             <directory>src/main/webapp</directory>
                             <excludes>
-                                <exclude>WEB-INF/queue.xml</exclude>
+                                <exclude>WEB-INF/queue.yaml</exclude>
                             </excludes>
                         </resource>
                         <resource>
