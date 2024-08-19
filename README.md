@@ -90,6 +90,7 @@ To build client library:
 
 # Changelog
 
+* 1.0.11 - java11 runtime + min instances 2
 * 1.0.10 - added support for cloudtask v2
 * 1.0.9 - added support for cloudtask v2beta3
 * 1.0.8 - change appengine-maven-plugin, readme actualized

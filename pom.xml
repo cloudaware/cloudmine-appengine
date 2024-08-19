@@ -7,7 +7,7 @@
     <groupId>com.cloudaware.cloudmine</groupId>
     <artifactId>cloudmine-appengine-server</artifactId>
     <name>cloudmine-appengine-server</name>
-    <version>1.0.10</version>
+    <version>1.0.11</version>
 
     <properties>
         <appengine.app.id>yourapp</appengine.app.id>
@@ -37,6 +37,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
             <groupId>com.google.endpoints</groupId>
             <artifactId>endpoints-framework</artifactId>
             <version>${endpoints-framework.version}</version>
@@ -50,6 +55,11 @@
             <groupId>com.google.endpoints</groupId>
             <artifactId>endpoints-management-control-appengine-all</artifactId>
             <version>${endpoints-management.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-1.0-sdk</artifactId>
+            <version>2.0.4</version>
         </dependency>
     </dependencies>
 
@@ -97,8 +107,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -146,7 +156,7 @@
                     <apis>
                         <param>com.cloudaware.cloudmine.appengine.AppEngineApi</param>
                         <!--<param>com.cloudaware.cloudmine.appengine.CloudTasksV2beta2Api</param>-->
-                        <param>com.cloudaware.cloudmine.appengine.CloudTasksV2beta3Api</param>
+                        <!--<param>com.cloudaware.cloudmine.appengine.CloudTasksV2beta3Api</param>-->
                         <param>com.cloudaware.cloudmine.appengine.CloudTasksV2Api</param>
                     </apis>
                 </configuration>

@@ -15,12 +15,18 @@
  limitations under the License.
 -->
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
-    <module>cloudmine-appengine</module>
+    <service>cloudmine-appengine</service>
     <threadsafe>true</threadsafe>
-    <runtime>java8</runtime>
+    <runtime>java11</runtime>
+    <app-engine-apis>true</app-engine-apis>
     <system-properties>
         <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
     </system-properties>
+    <automatic-scaling>
+        <min-instances>2</min-instances>
+        <max-instances>10</max-instances>
+        <min-idle-instances>2</min-idle-instances>
+    </automatic-scaling>
 
     ${esp.config}
 </appengine-web-app>
