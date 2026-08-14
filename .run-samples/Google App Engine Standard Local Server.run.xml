@@ -1,0 +1,59 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Google App Engine Standard Local Server" type="gcp-app-engine-local-run" factoryName="Local" APPLICATION_SERVER_NAME="Google App Engine Standard Local Server" ALTERNATIVE_JRE_ENABLED="false">
+    <option name="OPEN_IN_BROWSER" value="false" />
+    <option name="COMMON_VM_ARGUMENTS" value="-Ddisable-service-management=true --add-opens java.base/java.lang=ALL-UNNAMED" />
+    <server-settings>
+      <artifact>cloudmine-appengine-server:war exploded</artifact>
+      <port>9094</port>
+    </server-settings>
+    <RunnerSettings RunnerId="Debug">
+      <option name="DEBUG_PORT" value="55578" />
+    </RunnerSettings>
+    <ConfigurationWrapper VM_VAR="" RunnerId="Cover">
+      <option name="USE_ENV_VARIABLES" value="true" />
+      <STARTUP>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="" />
+      </STARTUP>
+      <SHUTDOWN>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="" />
+      </SHUTDOWN>
+    </ConfigurationWrapper>
+    <ConfigurationWrapper VM_VAR="" RunnerId="Debug">
+      <option name="USE_ENV_VARIABLES" value="true" />
+      <STARTUP>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="" />
+      </STARTUP>
+      <SHUTDOWN>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="" />
+      </SHUTDOWN>
+    </ConfigurationWrapper>
+    <ConfigurationWrapper VM_VAR="" RunnerId="Run">
+      <option name="USE_ENV_VARIABLES" value="true" />
+      <STARTUP>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="" />
+      </STARTUP>
+      <SHUTDOWN>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="" />
+      </SHUTDOWN>
+    </ConfigurationWrapper>
+    <method v="2" />
+  </configuration>
+</component>
